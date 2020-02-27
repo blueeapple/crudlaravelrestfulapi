@@ -34,7 +34,7 @@ class ClientController extends Controller
 //lalu kita buat variabel untuk mennyimpan hasil response
        if($client){
             $response=[
-                'response' => 'Successfuly invite your data',
+                'status_message' => 'Successfuly invite your data',
                 'method' => 'POST',
                 'description' => [
                     'link' => 'http://127.0.0.1:8000/api/cheese/input',
@@ -47,6 +47,30 @@ class ClientController extends Controller
         ], 200);
        }
        return response()->json($response,200);
+    }
+
+    public function showData()
+    {
+        $clients = Client::all();
+       if($clients){
+            $response = [
+                'status' => '1',
+                'status_number' => 'F00001',
+                'status_code'=> 'SSCXSS',
+                'status_message'=> 'Success',
+                'method' => 'GET',
+                'description' => [
+                    'data' => $clients
+                ]
+            ];
+       }else{
+           $response = [
+               'status' => '0',
+               'status_message' => 'Data not found',
+           ];
+           return response()->json($response, 404);
+       }
+       return response()->json($response, 200);
     }
 
 }

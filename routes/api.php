@@ -4,3 +4,4 @@ use Illuminate\Http\Request;
 
 //route input data
 Route::post('cheese/input','ClientController@inputData');
+Route::get('cheese','ClientController@showData');
