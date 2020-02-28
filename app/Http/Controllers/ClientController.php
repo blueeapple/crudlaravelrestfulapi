@@ -73,4 +73,63 @@ class ClientController extends Controller
        return response()->json($response, 200);
     }
 
+    public function updateData(Request $request, $id){
+// Tangkap inputan
+            $name = $request->name;
+            $email = $request->email;
+            $contact = $request->contact;
+            $gender = $request->gender;
+            $company = $request->company;
+            $position = $request->position;
+// temukan id yang akan dirubah
+            $clients = Client::find($id);
+//  proses perubahan
+            $clients->name = $name;
+            $clients->email = $email;
+            $clients->contact = $contact;
+            $clients->gender = $gender;
+            $clients->company = $company;
+            $clients->position = $position;
+            $clients->save();
+
+        if($clients){
+            $response = [
+                'status' => '1',
+                'status_number' => 'F00001',
+                'status_code'=> 'SSCXSS',
+                'status_message'=> 'Success',
+                'method' => 'Put',
+                'description' => [
+                    'data' => $clients
+                ]
+            ];
+        }else{
+            $response = [
+                'status' => '0',
+                'status_message' => 'Data not found',
+            ];
+            return response()->json($response, 404);
+        }
+        return response()->json($response, 200);
+    }
+
+    public function deleteData($id){
+        $client = Client::find($id);
+        $client->delete();
+
+        if($client){
+            $response = [
+                'status' => 1,
+                'method' => 'delete',
+                'data id' => $client->id
+            ];
+        }else{
+            $response = [
+                'status' => '0',
+                'status_message' => 'Data not found',
+            ];
+            return response()->json($response,404);
+        }
+        return response()->json($response, 200);
+    }
 }
