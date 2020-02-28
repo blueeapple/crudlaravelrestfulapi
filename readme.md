@@ -4,8 +4,11 @@
 
 ## CRUD RestfulAPI
 
-Lorem
+laravel Routing :
 - Create (Post).
+- Read (Get).
+- Update (Put).
+- Delete (Delete).
 
 
 Laravel is accessible, powerful, and provides tools required for large, robust applications.
